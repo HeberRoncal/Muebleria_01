@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta — Mueblería Trujillo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=Raleway:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/normalize.css">
+    <link rel="stylesheet" href="estilos/app.css">
+    <link rel="stylesheet" href="estilos/auth.css">
+    <!-- FontAwesome para iconos modernos de formulario -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1 class="nombre-sitio">Mueblería <span>Trujillo</span></h1>
+    </header>
+
+    <div class="contenedor-navegacion">
+        <nav class="nav-principal contenedor">
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="blog.html">Blog</a>
+            <a href="galeria.html">Galería</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="login.html" style="color: var(--primario); font-weight: 700;">Mi Cuenta</a>
+        </nav>
+    </div>
+
+    <main class="contenido-principal contenedor">
+        
+        <!-- VISTA 1: FORMULARIOS DE AUTENTICACIÓN (INICIALMENTE OCULTA) -->
+        <div id="auth-view" class="auth-wrapper" style="display: none;">
+            <div class="auth-card" id="authCard">
+                
+                <!-- Pestañas Conmutables -->
+                <div class="auth-tabs">
+                    <div class="auth-tab-indicator" id="tabIndicator"></div>
+                    <button class="auth-tab-btn active" onclick="toggleAuthMode('login')">Ingresar</button>
+                    <button class="auth-tab-btn" onclick="toggleAuthMode('register')">Registrarse</button>
+                </div>
+
+                <div class="auth-slider">
+                    
+                    <!-- FORMULARIO DE INICIO DE SESIÓN (LOGIN) -->
+                    <form id="loginForm" class="auth-form-pane" novalidate>
+                        <div class="text-center" style="margin-bottom: 1rem;">
+                            <h2 style="font-size: 2.8rem; margin-bottom: 0.5rem;">¡Qué bueno verte!</h2>
+                            <p style="font-size: 1.4rem; color: var(--texto-light);">Ingresa tus credenciales para acceder a tu panel.</p>
+                        </div>
+
+                        <!-- Banner de alertas -->
+                        <div id="loginAlert" class="alert-auth"></div>
+
+                        <!-- Campo: Correo o Usuario -->
+                        <div class="campo-auth">
+                            <label for="loginIdentifier">Correo o Usuario</label>
+                            <input type="text" id="loginIdentifier" placeholder="ejemplo@correo.com o admin" required>
+                            <i class="fa-solid fa-user campo-auth-icon"></i>
+                            <span class="campo-feedback" id="loginIdentifierFeedback"></span>
+                        </div>
+
+                        <!-- Campo: Contraseña -->
+                        <div class="campo-auth">
+                            <label for="loginPassword">Contraseña</label>
+                            <input type="password" id="loginPassword" placeholder="Tu contraseña" required>
+                            <i class="fa-solid fa-lock campo-auth-icon"></i>
+                            <span class="campo-feedback" id="loginPasswordFeedback"></span>
+                        </div>
+
+                        <button type="submit" id="btnLogin" class="btn btn-auth">Iniciar Sesión</button>
+                        
+                        <p class="text-center" style="font-size: 1.3rem; margin-top: 1.5rem; color: var(--texto-light);">
+                            ¿No tienes una cuenta? <a href="#" onclick="event.preventDefault(); toggleAuthMode('register');" style="color: var(--primario); font-weight: 700;">Regístrate aquí</a>
+                        </p>
+                    </form>
+
+                    <!-- FORMULARIO DE REGISTRO -->
+                    <form id="registerForm" class="auth-form-pane" novalidate>
+                        <div class="text-center" style="margin-bottom: 1rem;">
+                            <h2 style="font-size: 2.8rem; margin-bottom: 0.5rem;">Crear Cuenta</h2>
+                            <p style="font-size: 1.4rem; color: var(--texto-light);">Regístrate para realizar pedidos y guardar tus productos.</p>
+                        </div>
+
+                        <!-- Banner de alertas -->
+                        <div id="registerAlert" class="alert-auth"></div>
+
+                        <!-- Campo: Nombre Completo -->
+                        <div class="campo-auth">
+                            <label for="regNombre">Nombre Completo</label>
+                            <input type="text" id="regNombre" placeholder="Tu nombre y apellido" required>
+                            <i class="fa-solid fa-id-card campo-auth-icon"></i>
+                            <span class="campo-feedback" id="regNombreFeedback"></span>
+                        </div>
+
+                        <!-- Campo: Correo Electrónico -->
+                        <div class="campo-auth">
+                            <label for="regEmail">Correo Electrónico</label>
+                            <input type="email" id="regEmail" placeholder="correo@ejemplo.com" required>
+                            <i class="fa-solid fa-envelope campo-auth-icon"></i>
+                            <span class="campo-feedback" id="regEmailFeedback"></span>
+                        </div>
+
+                        <!-- Campo: Nombre de Usuario -->
+                        <div class="campo-auth">
+                            <label for="regUsername">Nombre de Usuario</label>
+                            <input type="text" id="regUsername" placeholder="nombre_usuario (mín. 3 caracteres)" required>
+                            <i class="fa-solid fa-at campo-auth-icon"></i>
+                            <span class="campo-feedback" id="regUsernameFeedback"></span>
+                        </div>
+
+                        <!-- Campo: Contraseña -->
+                        <div class="campo-auth">
+                            <label for="regPassword">Contraseña</label>
+                            <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required>
+                            <i class="fa-solid fa-lock campo-auth-icon"></i>
+                            
+                            <!-- Medidor de Fuerza de Contraseña -->
+                            <div class="password-strength-wrapper">
+                                <div class="password-strength-bar">
+                                    <div id="strengthProgress" class="password-strength-progress"></div>
+                                </div>
+                                <span id="strengthText" class="password-strength-text">Seguridad de la contraseña</span>
+                            </div>
+                            <span class="campo-feedback" id="regPasswordFeedback"></span>
+                        </div>
+
+                        <!-- Campo: Confirmar Contraseña -->
+                        <div class="campo-auth">
+                            <label for="regPasswordConfirm">Confirmar Contraseña</label>
+                            <input type="password" id="regPasswordConfirm" placeholder="Repite la contraseña" required>
+                            <i class="fa-solid fa-shield-halved campo-auth-icon"></i>
+                            <span class="campo-feedback" id="regPasswordConfirmFeedback"></span>
+                        </div>
+
+                        <button type="submit" id="btnRegister" class="btn btn-auth">Registrarse</button>
+
+                        <p class="text-center" style="font-size: 1.3rem; margin-top: 1.5rem; color: var(--texto-light);">
+                            ¿Ya tienes una cuenta? <a href="#" onclick="event.preventDefault(); toggleAuthMode('login');" style="color: var(--primario); font-weight: 700;">Ingresa aquí</a>
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA 2: PANEL DE USUARIO LOGUEADO (DASHBOARD) -->
+        <div id="dashboard-view" class="auth-wrapper" style="display: none;">
+            <div class="dashboard-user">
+                <div class="dashboard-avatar" id="userAvatar">U</div>
+                <div>
+                    <h2 style="font-size: 3.2rem; margin-bottom: 0.5rem;" id="userWelcome">¡Bienvenido!</h2>
+                    <p style="font-size: 1.6rem; color: var(--texto-light);">Has iniciado sesión de forma segura con MySQL y Apache.</p>
+                </div>
+
+                <div class="dashboard-info">
+                    <div class="dashboard-item">
+                        <span>Nombre Completo</span>
+                        <p id="infoNombre">-</p>
+                    </div>
+                    <div class="dashboard-item">
+                        <span>Nombre de Usuario</span>
+                        <p id="infoUsername">-</p>
+                    </div>
+                    <div class="dashboard-item" style="grid-column: span 2;">
+                        <span>Correo Electrónico</span>
+                        <p id="infoEmail">-</p>
+                    </div>
+                    <div class="dashboard-item" style="grid-column: span 2;">
+                        <span>Fecha de Registro</span>
+                        <p id="infoFecha">-</p>
+                    </div>
+                </div>
+
+                <button onclick="cerrarSesion()" class="btn" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);">Cerrar Sesión</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="grid-footer contenedor">
+            <div>
+                <h3>Categorías</h3>
+                <nav class="footer-menu">
+                    <a href="#">Cocina</a>
+                    <a href="#">Oficina</a>
+                    <a href="#">Jardín</a>
+                    <a href="#">Cochera</a>
+                    <a href="#">Dormitorio</a>
+                </nav>
+            </div>
+            <div>
+                <h3>Sobre Nosotros</h3>
+                <nav class="footer-menu">
+                    <a href="#">Nuestra Historia</a>
+                    <a href="#">Misión, Visión y Valores</a>
+                    <a href="#">Carreras</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos del Servicio</a>
+                </nav>
+            </div>
+            <div>
+                <h3>Soporte</h3>
+                <nav class="footer-menu">
+                    <a href="#">Preguntas Frecuentes</a>
+                    <a href="#">Ayuda en Línea</a>
+                    <a href="#">Confianza y Seguridad</a>
+                </nav>
+            </div>
+        </div>
+        <p class="copyright">Todos los derechos reservados &copy; 2026 — Mueblería Trujillo</p>
+    </footer>
+
+    <!-- LÓGICA DE VALIDACIÓN Y PETICIONES ASÍNCRONAS -->
+    <script>
+        // Auto-detector: redirigir automáticamente al servidor Apache (localhost) si se entra por Live Server o file://
+        if (window.location.hostname !== 'localhost' || window.location.port !== '') {
+            if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+                window.location.href = 'http://localhost/muebleria/' + window.location.pathname.split('/').pop();
+            }
+        }
+
+        // Configuración de la URL del Backend (apunta a nuestro script PHP)
+        const BACKEND_URL = 'login.php';
+
+        // Elementos DOM principales
+        const authView = document.getElementById('auth-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const authCard = document.getElementById('authCard');
+
+        // ====================================================================
+        // 1. CONTROL DE ESTADOS DE SESIÓN (AUTO-CHECK)
+        // ====================================================================
+        async function verificarSesion() {
+            try {
+                const response = await fetch(`${BACKEND_URL}?action=perfil`);
+                const data = await response.json();
+
+                if (data.autenticado) {
+                    mostrarDashboard(data.usuario);
+                } else {
+                    mostrarAuth();
+                }
+            } catch (error) {
+                console.error('Error al verificar sesión:', error);
+                mostrarAuth(); // Por defecto mostrar formularios en caso de falla
+            }
+        }
+
+        function mostrarDashboard(usuario) {
+            authView.style.display = 'none';
+            dashboardView.style.display = 'flex';
+            
+            // Setear datos visuales
+            document.getElementById('userWelcome').textContent = `¡Hola, ${usuario.nombre_completo.split(' ')[0]}!`;
+            document.getElementById('userAvatar').textContent = usuario.nombre_completo.charAt(0).toUpperCase();
+            document.getElementById('infoNombre').textContent = usuario.nombre_completo;
+            document.getElementById('infoUsername').textContent = `@${usuario.nombre_usuario}`;
+            document.getElementById('infoEmail').textContent = usuario.correo_electronico;
+            
+            // Formatear fecha de registro
+            if(usuario.fecha_registro) {
+                const fecha = new Date(usuario.fecha_registro);
+                document.getElementById('infoFecha').textContent = fecha.toLocaleDateString('es-ES', {
+                    day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+            } else {
+                document.getElementById('infoFecha').textContent = 'Recientemente';
+            }
+        }
+
+        function mostrarAuth() {
+            dashboardView.style.display = 'none';
+            authView.style.display = 'flex';
+        }
+
+        // Ejecutar verificación de sesión inmediatamente al cargar la página
+        document.addEventListener('DOMContentLoaded', verificarSesion);
+
+        // Cerrar sesión
+        async function cerrarSesion() {
+            try {
+                const response = await fetch(`${BACKEND_URL}?action=logout`);
+                const data = await response.json();
+                if (data.exito) {
+                    location.reload();
+                }
+            } catch (error) {
+                alert('Ocurrió un error al cerrar sesión.');
+            }
+        }
+
+        // ====================================================================
+        // 2. CONMUTACIÓN DE FORMULARIOS (SLIDE TRANSITION)
+        // ====================================================================
+        function toggleAuthMode(mode) {
+            const tabs = document.querySelectorAll('.auth-tab-btn');
+            
+            if (mode === 'login') {
+                authCard.classList.remove('show-register');
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                authCard.classList.add('show-register');
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+            limpiarFeedback();
+        }
+
+        function limpiarFeedback() {
+            // Limpia mensajes de error, bordes e inputs de validación
+            document.querySelectorAll('input').forEach(input => {
+                input.classList.remove('is-valid', 'is-invalid');
+            });
+            document.querySelectorAll('.campo-feedback').forEach(span => {
+                span.textContent = '';
+                span.className = 'campo-feedback';
+            });
+            document.querySelectorAll('.alert-auth').forEach(div => {
+                div.style.display = 'none';
+                div.textContent = '';
+            });
+        }
+
+        // ====================================================================
+        // 3. VALIDACIÓN EN TIEMPO REAL DEL LADO DEL CLIENTE
+        // ====================================================================
+        
+        // Elementos de registro
+        const regNombre = document.getElementById('regNombre');
+        const regEmail = document.getElementById('regEmail');
+        const regUsername = document.getElementById('regUsername');
+        const regPassword = document.getElementById('regPassword');
+        const regPasswordConfirm = document.getElementById('regPasswordConfirm');
+
+        // Helpers de validación
+        function marcarValido(input, feedbackSpan, mensaje = '') {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+            feedbackSpan.className = 'campo-feedback success';
+            feedbackSpan.textContent = mensaje;
+            return true;
+        }
+
+        function marcarInvalido(input, feedbackSpan, mensaje) {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            feedbackSpan.className = 'campo-feedback error';
+            feedbackSpan.textContent = mensaje;
+            return false;
+        }
+
+        // Validar Nombre
+        function validarNombre() {
+            const feedback = document.getElementById('regNombreFeedback');
+            if (regNombre.value.trim() === '') {
+                return marcarInvalido(regNombre, feedback, 'El nombre completo es obligatorio.');
+            }
+            return marcarValido(regNombre, feedback);
+        }
+
+        // Validar Email
+        function validarEmail() {
+            const feedback = document.getElementById('regEmailFeedback');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const valor = regEmail.value.trim();
+
+            if (valor === '') {
+                return marcarInvalido(regEmail, feedback, 'El correo electrónico es obligatorio.');
+            }
+            if (!emailRegex.test(valor)) {
+                return marcarInvalido(regEmail, feedback, 'Ingrese un formato de correo válido (ej: usuario@ejemplo.com).');
+            }
+            return marcarValido(regEmail, feedback);
+        }
+
+        // Validar Username
+        function validarUsername() {
+            const feedback = document.getElementById('regUsernameFeedback');
+            const valor = regUsername.value.trim();
+            const userRegex = /^[a-zA-Z0-9_-]+$/;
+
+            if (valor === '') {
+                return marcarInvalido(regUsername, feedback, 'El nombre de usuario es obligatorio.');
+            }
+            if (valor.length < 3) {
+                return marcarInvalido(regUsername, feedback, 'Debe tener al menos 3 caracteres.');
+            }
+            if (!userRegex.test(valor)) {
+                return marcarInvalido(regUsername, feedback, 'Solo letras, números, guiones y guiones bajos.');
+            }
+            return marcarValido(regUsername, feedback);
+        }
+
+        // Validar Password y su Fuerza
+        function validarPassword() {
+            const feedback = document.getElementById('regPasswordFeedback');
+            const password = regPassword.value;
+            const progress = document.getElementById('strengthProgress');
+            const text = document.getElementById('strengthText');
+
+            if (password === '') {
+                progress.className = 'password-strength-progress';
+                text.textContent = 'Seguridad de la contraseña';
+                text.style.color = 'var(--texto-light)';
+                return marcarInvalido(regPassword, feedback, 'La contraseña es obligatoria.');
+            }
+
+            if (password.length < 6) {
+                progress.className = 'password-strength-progress strength-weak';
+                text.textContent = 'Muy corta (Mín. 6 caracteres)';
+                text.style.color = '#ef4444';
+                return marcarInvalido(regPassword, feedback, 'Debe tener al menos 6 caracteres.');
+            }
+
+            // Calcular fuerza
+            let score = 0;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            if (score <= 1) {
+                progress.className = 'password-strength-progress strength-weak';
+                text.textContent = 'Fuerza: Débil';
+                text.style.color = '#ef4444';
+            } else if (score === 2) {
+                progress.className = 'password-strength-progress strength-medium';
+                text.textContent = 'Fuerza: Media';
+                text.style.color = 'var(--accent)';
+            } else {
+                progress.className = 'password-strength-progress strength-strong';
+                text.textContent = 'Fuerza: Excelente';
+                text.style.color = 'var(--secundario-dark)';
+            }
+
+            return marcarValido(regPassword, feedback);
+        }
+
+        // Validar Coincidencia de Passwords
+        function validarPasswordConfirm() {
+            const feedback = document.getElementById('regPasswordConfirmFeedback');
+            const password = regPassword.value;
+            const confirm = regPasswordConfirm.value;
+
+            if (confirm === '') {
+                return marcarInvalido(regPasswordConfirm, feedback, 'Confirme la contraseña.');
+            }
+            if (password !== confirm) {
+                return marcarInvalido(regPasswordConfirm, feedback, 'Las contraseñas no coinciden.');
+            }
+            return marcarValido(regPasswordConfirm, feedback, 'Las contraseñas coinciden.');
+        }
+
+        // Asignar listeners en tiempo real para el formulario de registro
+        regNombre.addEventListener('input', validarNombre);
+        regEmail.addEventListener('input', validarEmail);
+        regUsername.addEventListener('input', validarUsername);
+        regPassword.addEventListener('input', () => {
+            validarPassword();
+            if (regPasswordConfirm.value !== '') {
+                validarPasswordConfirm();
+            }
+        });
+        regPasswordConfirm.addEventListener('input', validarPasswordConfirm);
+
+        // Validadores del Login
+        const loginIdentifier = document.getElementById('loginIdentifier');
+        const loginPassword = document.getElementById('loginPassword');
+
+        function validarLoginFields() {
+            let ok = true;
+            const idFeedback = document.getElementById('loginIdentifierFeedback');
+            const passFeedback = document.getElementById('loginPasswordFeedback');
+
+            if (loginIdentifier.value.trim() === '') {
+                marcarInvalido(loginIdentifier, idFeedback, 'Ingrese su usuario o correo.');
+                ok = false;
+            } else {
+                marcarValido(loginIdentifier, idFeedback);
+            }
+
+            if (loginPassword.value === '') {
+                marcarInvalido(loginPassword, passFeedback, 'Ingrese su contraseña.');
+                ok = false;
+            } else {
+                marcarValido(loginPassword, passFeedback);
+            }
+            return ok;
+        }
+
+        // ====================================================================
+        // 4. COMUNICACIÓN ASÍNCRONA CON EL SERVIDOR (FETCH API)
+        // ====================================================================
+
+        // Manejar Envío de Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validarLoginFields()) return;
+
+            const btn = document.getElementById('btnLogin');
+            const alert = document.getElementById('loginAlert');
+            
+            // Estado de carga
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Ingresando...';
+            alert.style.display = 'none';
+
+            const payload = {
+                correo_o_usuario: loginIdentifier.value.trim(),
+                password: loginPassword.value
+            };
+
+            try {
+                const response = await fetch(`${BACKEND_URL}?action=login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const resData = await response.json();
+
+                if (resData.exito) {
+                    alert.className = 'alert-auth success';
+                    alert.textContent = resData.mensaje;
+                    alert.style.display = 'block';
+
+                    // Limpiar formulario y redireccionar o recargar sesión
+                    setTimeout(() => {
+                        document.getElementById('loginForm').reset();
+                        limpiarFeedback();
+                        verificarSesion();
+                    }, 1000);
+
+                } else {
+                    alert.className = 'alert-auth error';
+                    alert.textContent = resData.mensaje;
+                    alert.style.display = 'block';
+                    
+                    loginPassword.classList.add('is-invalid');
+                    loginPassword.value = ''; // limpiar contraseña fallida
+                }
+            } catch (error) {
+                alert.className = 'alert-auth error';
+                alert.textContent = 'Error de red: No se pudo conectar con el servidor web Apache.';
+                alert.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Iniciar Sesión';
+            }
+        });
+
+        // Manejar Envío de Registro
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Ejecutar todas las validaciones antes de enviar
+            const v1 = validarNombre();
+            const v2 = validarEmail();
+            const v3 = validarUsername();
+            const v4 = validarPassword();
+            const v5 = validarPasswordConfirm();
+
+            if (!(v1 && v2 && v3 && v4 && v5)) return;
+
+            const btn = document.getElementById('btnRegister');
+            const alert = document.getElementById('registerAlert');
+
+            // Estado de carga
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Registrando...';
+            alert.style.display = 'none';
+
+            const payload = {
+                nombre_completo: regNombre.value.trim(),
+                correo_electronico: regEmail.value.trim(),
+                nombre_usuario: regUsername.value.trim(),
+                password: regPassword.value,
+                password_confirm: regPasswordConfirm.value
+            };
+
+            try {
+                const response = await fetch(`${BACKEND_URL}?action=registro`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const resData = await response.json();
+
+                if (resData.exito) {
+                    alert.className = 'alert-auth success';
+                    alert.textContent = resData.mensaje;
+                    alert.style.display = 'block';
+
+                    setTimeout(() => {
+                        document.getElementById('registerForm').reset();
+                        limpiarFeedback();
+                        verificarSesion();
+                    }, 1200);
+
+                } else {
+                    alert.className = 'alert-auth error';
+                    alert.textContent = resData.mensaje;
+                    alert.style.display = 'block';
+                }
+            } catch (error) {
+                alert.className = 'alert-auth error';
+                alert.textContent = 'Error de red: No se pudo conectar con el servidor web Apache.';
+                alert.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Registrarse';
+            }
+        });
+    </script>
+</body>
+</html>

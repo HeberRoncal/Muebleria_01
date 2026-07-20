@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda — Mueblería Trujillo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@700&family=Raleway:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/normalize.css">
+    <link rel="stylesheet" href="estilos/app.css">
+</head>
+<body>
+
+    <header>
+        <h1 class="nombre-sitio">Mueblería <span>Trujillo</span></h1>
+    </header>
+
+    <div class="contenedor-navegacion">
+        <nav class="nav-principal contenedor">
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="tienda.html">Tienda</a>
+            <a href="blog.html">Blog</a>
+            <a href="galeria.html">Galería</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </div>
+
+    <div class="tienda-banner">
+        <h2>Nuestra Tienda</h2>
+        <p>Encuentra el mueble perfecto para cada espacio de tu hogar</p>
+    </div>
+
+    <div class="contenedor">
+        <div class="filtros">
+            <button class="filtro-btn activo">Todos</button>
+            <button class="filtro-btn">Sala</button>
+            <button class="filtro-btn">Dormitorio</button>
+            <button class="filtro-btn">Oficina</button>
+            <button class="filtro-btn">Comedor</button>
+            <button class="filtro-btn">Cocina</button>
+        </div>
+    </div>
+
+    <main class="contenido-tienda contenedor">
+        <div class="listado-tienda">
+
+            <!-- Sala -->
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto1.jpg" alt="Sofá Moderno 3 Cuerpos">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Sala</p>
+                    <h3 class="card-nombre">Sofá Moderno 3 Cuerpos</h3>
+                    <p class="card-desc">Tapizado en tela premium, estructura de madera sólida y espuma de alta densidad para un confort excepcional.</p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="card-precio-tachado">S/. 1,500</span>
+                            <span class="card-precio">S/. 1,200</span>
+                        </div>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto2.jpg" alt="Mesa de Centro Roble">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Sala</p>
+                    <h3 class="card-nombre">Mesa de Centro Roble</h3>
+                    <p class="card-desc">Madera maciza de roble con acabado satinado y patas metálicas negras. Diseño escandinavo atemporal.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 350</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto3.jpg" alt="Estante Biblioteca">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Sala</p>
+                    <h3 class="card-nombre">Estante Biblioteca</h3>
+                    <p class="card-desc">6 repisas regulables, ideal para libros, decoración y televisores de hasta 55". Fácil montaje.</p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="card-precio-tachado">S/. 650</span>
+                            <span class="card-precio">S/. 480</span>
+                        </div>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto6.jpg" alt="Lámpara de Pie Arco">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Sala</p>
+                    <h3 class="card-nombre">Lámpara de Pie Arco</h3>
+                    <p class="card-desc">Diseño contemporáneo con brazo de metal dorado y pantalla de lino. Luz cálida regulable.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 180</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dormitorio -->
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto5.jpg" alt="Cómoda 6 Cajones">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Dormitorio</p>
+                    <h3 class="card-nombre">Cómoda 6 Cajones</h3>
+                    <p class="card-desc">Amplio espacio de almacenamiento con cajones de cierre suave y tiraderas metálicas modernas.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 620</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto4.jpg" alt="Velador Minimalista">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Dormitorio</p>
+                    <h3 class="card-nombre">Velador Minimalista</h3>
+                    <p class="card-desc">Diseño compacto con cajón y repisa inferior. Perfecto junto a tu cama. Disponible en blanco y nogal.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 195</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto1.jpg" alt="Cabecera Tapizada">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Dormitorio</p>
+                    <h3 class="card-nombre">Cabecera Tapizada</h3>
+                    <p class="card-desc">Tapizado en terciopelo con botones decorativos. Disponible para camas de 1.5 y 2 plazas.</p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="card-precio-tachado">S/. 580</span>
+                            <span class="card-precio">S/. 420</span>
+                        </div>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oficina -->
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto4.jpg" alt="Silla Ergonómica Pro">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Oficina</p>
+                    <h3 class="card-nombre">Silla Ergonómica Pro</h3>
+                    <p class="card-desc">Soporte lumbar ajustable, reposabrazos 4D, altura neumática y malla transpirable de alta calidad.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 290</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto3.jpg" alt="Escritorio en L">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Oficina</p>
+                    <h3 class="card-nombre">Escritorio en L</h3>
+                    <p class="card-desc">Superficie amplia en forma de L con gestión de cables integrada. Ideal para home office productivo.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 750</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto2.jpg" alt="Archivador Metálico">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Oficina</p>
+                    <h3 class="card-nombre">Archivador Metálico</h3>
+                    <p class="card-desc">3 cajones con cerradura, riel telescópico y base con ruedas. Capacidad para carpetas A4 y oficio.</p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="card-precio-tachado">S/. 380</span>
+                            <span class="card-precio">S/. 290</span>
+                        </div>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comedor -->
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto1.jpg" alt="Mesa Comedor 6 Personas">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Comedor</p>
+                    <h3 class="card-nombre">Mesa Comedor 6 Personas</h3>
+                    <p class="card-desc">Tablero de madera maciza con patas metálicas. Diseño robusto y elegante para reuniones familiares.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 1,100</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto5.jpg" alt="Sillas Comedor x4">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Comedor</p>
+                    <h3 class="card-nombre">Sillas Comedor x4</h3>
+                    <p class="card-desc">Set de 4 sillas tapizadas en cuero sintético. Estructura de acero negro mate, fácil limpieza.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 560</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto6.jpg" alt="Vitrina Vajillera">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Comedor</p>
+                    <h3 class="card-nombre">Vitrina Vajillera</h3>
+                    <p class="card-desc">Puertas de vidrio templado con luz LED interior. Exhibe tu vajilla con elegancia. 4 repisas.</p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="card-precio-tachado">S/. 920</span>
+                            <span class="card-precio">S/. 720</span>
+                        </div>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cocina -->
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto2.jpg" alt="Isla de Cocina">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Cocina</p>
+                    <h3 class="card-nombre">Isla de Cocina</h3>
+                    <p class="card-desc">Con tablero de granito, 2 cajones y espacio inferior abierto. Incluye 2 taburetes altos a juego.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 1,350</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto3.jpg" alt="Alacena Superior">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Cocina</p>
+                    <h3 class="card-nombre">Alacena Superior</h3>
+                    <p class="card-desc">Mueble superior para cocina con 2 puertas abatibles. Acabado melamínico resistente a la humedad.</p>
+                    <div class="card-footer">
+                        <span class="card-precio">S/. 280</span>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-producto">
+                <div class="card-imagen">
+                    <img src="img/producto4.jpg" alt="Taburete de Barra x2">
+                </div>
+                <div class="card-info">
+                    <p class="card-categoria">Cocina</p>
+                    <h3 class="card-nombre">Taburete de Barra x2</h3>
+                    <p class="card-desc">Set de 2 taburetes con asiento acolchado giratorio y reposapiés. Altura regulable de 60 a 80 cm.</p>
+                    <div class="card-footer">
+                        <div>
+                            <span class="card-precio-tachado">S/. 320</span>
+                            <span class="card-precio">S/. 240</span>
+                        </div>
+                        <a href="contacto.html" class="btn-agregar">Consultar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="grid-footer contenedor">
+            <div>
+                <h3>Categorías</h3>
+                <nav class="footer-menu">
+                    <a href="#">Cocina</a>
+                    <a href="#">Oficina</a>
+                    <a href="#">Jardín</a>
+                    <a href="#">Cochera</a>
+                    <a href="#">Dormitorio</a>
+                </nav>
+            </div>
+            <div>
+                <h3>Sobre Nosotros</h3>
+                <nav class="footer-menu">
+                    <a href="#">Nuestra Historia</a>
+                    <a href="#">Misión, Visión y Valores</a>
+                    <a href="#">Carreras</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos del Servicio</a>
+                </nav>
+            </div>
+            <div>
+                <h3>Soporte</h3>
+                <nav class="footer-menu">
+                    <a href="#">Preguntas Frecuentes</a>
+                    <a href="#">Ayuda en Línea</a>
+                    <a href="#">Confianza y Seguridad</a>
+                </nav>
+            </div>
+        </div>
+        <p class="copyright">Todos los derechos reservados &copy; 2025 — Mueblería Trujillo</p>
+    </footer>
+
+</body>
+</html>
