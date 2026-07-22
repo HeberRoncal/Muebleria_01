@@ -70,6 +70,10 @@ img {
   margin: 0 auto;
 }
 
+.contenedormapa{
+  text-align: center;
+}
+
 .text-center { text-align: center; }
 
 .btn {
